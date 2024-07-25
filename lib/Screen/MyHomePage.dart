@@ -1,9 +1,12 @@
+import 'package:bmi_calculator/Screen/DetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:bmi_calculator/IconContent.dart';
-import 'package:bmi_calculator/ContainerWidget.dart';
+import 'package:bmi_calculator/Components/IconContent.dart';
+import 'package:bmi_calculator/Components/ContainerWidget.dart';
 import 'package:bmi_calculator/Constants.dart';
-import 'RoundIconButton.dart';
+import '../Components/RoundIconButton.dart';
+import 'package:bmi_calculator/Components/BottomButton.dart';
+import 'package:bmi_calculator/CalculatorBrain.dart';
 
 enum Gender {
   male,
@@ -21,7 +24,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Gender selectedGender = Gender.male;
   int heightValue = 100;
-  int weight = 3;
+  int weight = 50;
   int age = 20;
 
   @override
@@ -212,14 +215,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          BottomButton(
+            label: "CALCULATE",
+            onTap: () {
+              CalculatorBrain calculatorBrain = CalculatorBrain(height: heightValue, weight: weight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DetailPage(
+                  result: calculatorBrain.calculateBMI(),
+                  calculateValue: calculatorBrain.getResult(),
+                  remark: calculatorBrain.getAdvice(),)),
+              );
+            },
           ),
         ],
       ),
     );
   }
 }
+
+

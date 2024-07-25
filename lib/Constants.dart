@@ -10,6 +10,11 @@ const kLargeLabelStyle = TextStyle(
   fontWeight: FontWeight.w900,
 );
 
+const kMediumLabelStyle = TextStyle(
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
+);
+
 const kBottomContainerHeight = 80.0;
 const kActiveCardColor = Color(0xFF1D1E33);
 const kInActiveCardColor = Color(0xFF111328);
